@@ -118,6 +118,11 @@
       white-space: nowrap;
     }
 
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
     .btn-sm {
       padding: 6px 11px;
       font-size: 12px;
@@ -595,7 +600,6 @@
       margin: 0 auto;
     }
 
-    /* Theme 1: Classic Royal Blue */
     .theme-royal .doc-banner {
       border-bottom: 3px solid #1d4ed8;
       padding-bottom: 20px;
@@ -612,7 +616,6 @@
       color: #1d4ed8;
     }
 
-    /* Theme 2: Executive Midnight Dark */
     .theme-midnight .doc-banner {
       background: #0f172a;
       color: #ffffff;
@@ -635,7 +638,6 @@
       color: #0f172a;
     }
 
-    /* Theme 3: Modern Emerald Minimal */
     .theme-emerald .doc-banner {
       border-left: 5px solid #059669;
       padding-left: 18px;
@@ -656,7 +658,6 @@
       color: #059669;
     }
 
-    /* Theme 4: Compact Technical Grid */
     .theme-grid .doc-banner {
       border: 1.5px solid #334155;
       padding: 18px;
@@ -681,33 +682,15 @@
     }
 
     /* Mobile & Tablet Responsive Overrides */
-    .mobile-menu-btn {
-      display: none;
-    }
-
-    .mobile-close-btn {
-      display: none;
-    }
-
-    .sidebar-overlay {
-      display: none;
-    }
+    .mobile-menu-btn { display: none; }
+    .mobile-close-btn { display: none; }
+    .sidebar-overlay { display: none; }
 
     @media (max-width: 1024px) {
-      .grid-4 {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-      .dashboard-charts-grid,
-      .grid-2,
-      .grid-3 {
-        grid-template-columns: 1fr;
-      }
-      .mobile-menu-btn {
-        display: inline-flex;
-      }
-      .mobile-close-btn {
-        display: inline-flex;
-      }
+      .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .dashboard-charts-grid, .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .mobile-menu-btn { display: inline-flex; }
+      .mobile-close-btn { display: inline-flex; }
       .sidebar {
         position: fixed;
         left: 0;
@@ -715,9 +698,7 @@
         transform: translateX(-100%);
         transition: transform 0.22s ease;
       }
-      .sidebar.open {
-        transform: translateX(0);
-      }
+      .sidebar.open { transform: translateX(0); }
       .sidebar-overlay.open {
         display: block;
         position: fixed;
@@ -728,31 +709,15 @@
     }
 
     @media (max-width: 640px) {
-      .grid-4,
-      .form-2col,
-      .form-3col {
-        grid-template-columns: 1fr;
-      }
-      .topbar {
-        padding: 12px 14px;
-      }
-      .content-container {
-        padding: 14px;
-      }
-      .a4-sheet {
-        padding: 20px;
-      }
+      .grid-4, .form-2col, .form-3col { grid-template-columns: 1fr; }
+      .topbar { padding: 12px 14px; }
+      .content-container { padding: 14px; }
+      .a4-sheet { padding: 20px; }
     }
 
-    /* Print Media Rules */
     @media print {
-      body * {
-        visibility: hidden !important;
-      }
-      #print-target,
-      #print-target * {
-        visibility: visible !important;
-      }
+      body * { visibility: hidden !important; }
+      #print-target, #print-target * { visibility: visible !important; }
       #print-target {
         position: fixed !important;
         left: 0 !important;
@@ -765,9 +730,7 @@
         box-shadow: none !important;
         background: #ffffff !important;
       }
-      .no-print {
-        display: none !important;
-      }
+      .no-print { display: none !important; }
     }
   </style>
 </head>
@@ -776,11 +739,10 @@
   <div id="toast-container"></div>
 
   <!-- =====================================================================
-       1. AUTHENTICATION SCREEN (SIGN IN / CREATE ACCOUNT / DEMO LOGIN)
+       1. AUTHENTICATION SCREEN (STRICT USERNAME LOGIN VERIFICATION)
        ===================================================================== -->
   <div id="auth-screen">
     <div class="auth-box">
-      <!-- Pure Hexagonal Circuit DM Emblem with Transparent Exterior -->
       <div class="auth-logo-wrap" aria-label="DM Tech Solutions Emblem">
         <svg width="108" height="108" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -828,32 +790,30 @@
 
       <div class="auth-card">
         <div class="auth-tabs">
-          <button type="button" id="auth-tab-login" class="auth-tab active">Sign In</button>
+          <button type="button" id="auth-tab-login" class="auth-tab active">Username Sign In</button>
           <button type="button" id="auth-tab-signup" class="auth-tab">Create Account</button>
         </div>
 
-        <!-- Sign In Form -->
+        <!-- Strict Username Sign In Form -->
         <form id="login-form" style="padding: 24px; display: flex; flex-direction: column; gap: 15px;">
           <div>
-            <label class="label" for="login-email">Email Address</label>
-            <input type="email" id="login-email" class="input" required placeholder="admin@dmtechsolutions.lk" />
+            <label class="label" for="login-username">Username *</label>
+            <input type="text" id="login-username" class="input" required autocomplete="username" placeholder="Enter your username" />
           </div>
           <div>
-            <label class="label" for="login-password">Password</label>
-            <input type="password" id="login-password" class="input" required placeholder="Enter your password" />
+            <label class="label" for="login-password">Password *</label>
+            <input type="password" id="login-password" class="input" required autocomplete="current-password" placeholder="Enter your password" />
           </div>
           <div id="login-error" class="hidden" style="background: var(--danger-soft); color: var(--danger); padding: 10px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 600;"></div>
-          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 11px 16px;">Sign In to Workspace</button>
-
-          <div style="border-top: 1px solid var(--border-light); padding-top: 14px; margin-top: 2px;">
-            <button type="button" id="quick-demo-login-btn" class="btn btn-secondary" style="width: 100%; padding: 10px 14px;">
-              Quick Demo Login (DM Tech Sample Data)
-            </button>
-          </div>
+          <button type="submit" id="login-submit-btn" class="btn btn-primary" style="width: 100%; padding: 11px 16px;">Verify &amp; Open Workspace</button>
         </form>
 
         <!-- Sign Up Form -->
         <form id="signup-form" class="hidden" style="padding: 22px 24px; display: flex; flex-direction: column; gap: 12px;">
+          <div>
+            <label class="label" for="signup-username">Username (Unique Login ID) *</label>
+            <input type="text" id="signup-username" class="input" required pattern="[a-zA-Z0-9_.-]{3,30}" placeholder="e.g. dmtech_admin" />
+          </div>
           <div>
             <label class="label" for="signup-business">Business Name *</label>
             <input type="text" id="signup-business" class="input" required value="DM Tech Solutions" />
@@ -881,7 +841,7 @@
             <input type="text" id="signup-address" class="input" placeholder="No. 25, Galle Road, Colombo" />
           </div>
           <div id="signup-error" class="hidden" style="background: var(--danger-soft); color: var(--danger); padding: 10px 12px; border-radius: 8px; font-size: 12.5px; font-weight: 600;"></div>
-          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 11px 16px; margin-top: 4px;">Create Account &amp; Open</button>
+          <button type="submit" id="signup-submit-btn" class="btn btn-primary" style="width: 100%; padding: 11px 16px; margin-top: 4px;">Create Account &amp; Sync Drive</button>
         </form>
       </div>
     </div>
@@ -936,7 +896,8 @@
       </nav>
 
       <div class="sidebar-footer">
-        <div id="sidebar-user-email" style="font-size: 11.5px; color: #94a3b8; margin-bottom: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></div>
+        <div id="sidebar-user-email" style="font-size: 11.5px; color: #94a3b8; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></div>
+        <div id="drive-sync-badge" style="font-size: 11px; color: #34d399; margin-bottom: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Google Drive Connected</div>
         <button type="button" id="logout-btn" class="btn btn-soft-danger btn-sm" style="width: 100%;">Sign Out</button>
       </div>
     </aside>
@@ -948,10 +909,11 @@
           <button type="button" id="mobile-open-sidebar" class="mobile-menu-btn btn btn-secondary btn-sm" aria-label="Open Menu">☰</button>
           <div style="min-width: 0;">
             <h1 id="topbar-title" style="margin: 0; font-size: 18px; font-weight: 800; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Dashboard &amp; Profit</h1>
-            <p id="topbar-subtitle" style="margin: 0; font-size: 12px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Real-time revenue, expenses, net profit &amp; saved documents</p>
+            <p id="topbar-subtitle" style="margin: 0; font-size: 12px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Real-time revenue, expenses, net profit &amp; Google Drive cloud sync</p>
           </div>
         </div>
         <div style="display: flex; align-items: center; gap: 8px; flex-shrink: 0;">
+          <button type="button" id="manual-sync-btn" class="btn btn-secondary btn-sm" title="Sync now with Google Drive">Sync Drive</button>
           <button type="button" id="topbar-new-quote-btn" class="btn btn-soft-primary btn-sm">+ Quotation</button>
           <button type="button" id="topbar-new-invoice-btn" class="btn btn-primary btn-sm">+ Invoice</button>
         </div>
@@ -962,7 +924,6 @@
              TAB 1: DASHBOARD & PROFIT
              ============================================================= -->
         <section id="tab-dashboard" style="display: flex; flex-direction: column; gap: 20px;">
-          <!-- 4 KPI Cards -->
           <div class="grid-4">
             <div class="card" style="padding: 18px;">
               <div style="font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted);">Paid Revenue</div>
@@ -989,7 +950,6 @@
             </div>
           </div>
 
-          <!-- 6-Month Chart + Category Breakdown -->
           <div class="dashboard-charts-grid">
             <div class="card" style="padding: 20px; display: flex; flex-direction: column; justify-content: space-between;">
               <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 16px;">
@@ -1016,7 +976,6 @@
             </div>
           </div>
 
-          <!-- Saved Invoices & Saved Quotations Directly on Dashboard -->
           <div class="grid-2">
             <div class="card" style="overflow: hidden;">
               <div style="padding: 16px 18px; border-bottom: 1px solid var(--border-light); display: flex; align-items: center; justify-content: space-between; gap: 8px;">
@@ -1224,7 +1183,6 @@
              ============================================================= -->
         <section id="tab-directory" class="hidden" style="display: flex; flex-direction: column; gap: 18px;">
           <div class="grid-2">
-            <!-- Catalog Presets -->
             <div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 14px;">
               <div>
                 <h2 style="margin: 0; font-size: 15px; font-weight: 700;">Product &amp; Service Catalog</h2>
@@ -1263,7 +1221,6 @@
               </div>
             </div>
 
-            <!-- Saved Clients -->
             <div class="card" style="padding: 20px; display: flex; flex-direction: column; gap: 14px;">
               <div>
                 <h2 style="margin: 0; font-size: 15px; font-weight: 700;">Saved Clients Directory</h2>
@@ -1313,7 +1270,6 @@
              TAB 6: SETTINGS, CURRENCY, THEMES, GOOGLE DRIVE & RESET
              ============================================================= -->
         <section id="tab-settings" class="hidden" style="display: flex; flex-direction: column; gap: 18px; max-width: 920px;">
-          <!-- Company Profile, Currency & PDF Theme -->
           <div class="card" style="padding: 22px;">
             <h2 style="margin: 0 0 4px; font-size: 16px; font-weight: 700;">DM Tech Solutions — Company, Currency &amp; PDF Theme</h2>
             <p style="margin: 0 0 18px; font-size: 12.5px; color: var(--text-muted);">Configure business details, currency symbol, and default printable document theme.</p>
@@ -1390,24 +1346,22 @@
             </form>
           </div>
 
-          <!-- Backup, Restore & Google Drive Helper -->
           <div class="card" style="padding: 22px; display: flex; flex-direction: column; gap: 14px;">
             <div>
-              <h2 style="margin: 0; font-size: 15.5px; font-weight: 700;">Backup, Restore &amp; Google Drive Sync</h2>
-              <p style="margin: 3px 0 0; font-size: 12.5px; color: var(--text-muted);">Export a JSON backup to upload to Google Drive, or open the Google Drive Apps Script guide for automated cloud saving.</p>
+              <h2 style="margin: 0; font-size: 15.5px; font-weight: 700;">Google Drive Cloud Sync &amp; JSON Backup</h2>
+              <p style="margin: 3px 0 0; font-size: 12.5px; color: var(--text-muted);">All records automatically sync to Google Drive (<code>DM_Tech_Cloud_DB</code>). You can also export or restore a local JSON snapshot.</p>
             </div>
 
             <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+              <button type="button" id="settings-sync-now-btn" class="btn btn-success">Sync to Google Drive Now</button>
               <button type="button" id="export-json-btn" class="btn btn-primary">Export Backup (.JSON)</button>
               <label class="btn btn-secondary" style="cursor: pointer;">
                 <span>Import Backup (.JSON)</span>
                 <input type="file" id="import-json-input" accept=".json,application/json" class="hidden" />
               </label>
-              <button type="button" id="open-gdrive-modal-btn" class="btn btn-soft-primary">Google Drive Auto-Save Setup</button>
             </div>
           </div>
 
-          <!-- Reset User Data Section -->
           <div class="card" style="padding: 22px; border-color: #fecaca; background: #fffafa;">
             <h2 style="margin: 0 0 4px; font-size: 15.5px; font-weight: 700; color: var(--danger);">Reset User Data</h2>
             <p style="margin: 0 0 16px; font-size: 12.5px; color: var(--text-secondary);">Clear all transaction records while keeping your company settings, or perform a full reset.</p>
@@ -1495,7 +1449,6 @@
           </div>
         </div>
 
-        <!-- Line Items -->
         <div>
           <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px;">
             <span style="font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--text-secondary);">Line Items</span>
@@ -1524,7 +1477,6 @@
           </div>
         </div>
 
-        <!-- Discount, Tax & Totals -->
         <div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px;">
           <div style="display: flex; gap: 12px;">
             <div style="width: 130px;">
@@ -1664,38 +1616,7 @@
   </div>
 
   <!-- =====================================================================
-       5. GOOGLE DRIVE AUTO-SAVE HELPER MODAL
-       ===================================================================== -->
-  <div id="gdrive-modal" class="modal-backdrop hidden">
-    <div class="modal-panel" style="max-width: 680px;">
-      <div class="modal-header">
-        <h3 style="margin: 0; font-size: 15.5px; font-weight: 800;">Google Drive Backup &amp; Apps Script Guide</h3>
-        <button type="button" id="close-gdrive-modal-btn" class="btn btn-secondary btn-sm">✕</button>
-      </div>
-      <div class="modal-body" style="display: flex; flex-direction: column; gap: 14px; font-size: 13px;">
-        <p style="margin: 0; color: var(--text-secondary);">
-          1. Click <strong>Export Backup (.JSON)</strong> in Settings and upload the file to your Google Drive folder anytime.<br />
-          2. Or create a Google Apps Script Web App on <strong>script.google.com</strong> using the template below to save JSON snapshots directly to your Google Drive:
-        </p>
-        <pre id="apps-script-snippet" style="margin: 0; background: #0f172a; color: #e2e8f0; padding: 14px; border-radius: 10px; font-size: 11.5px; overflow-x: auto;">function doPost(e) {
-  var folderName = "DM Tech Solutions Backups";
-  var folders = DriveApp.getFoldersByName(folderName);
-  var folder = folders.hasNext() ? folders.next() : DriveApp.createFolder(folderName);
-  var payload = e.postData ? e.postData.contents : "{}";
-  var fileName = "DM_Tech_Backup_" + Utilities.formatDate(new Date(), Session.getScriptTimeZone(), "yyyy-MM-dd_HH-mm") + ".json";
-  var file = folder.createFile(fileName, payload, MimeType.PLAIN_TEXT);
-  return ContentService.createTextOutput(JSON.stringify({ ok: true, fileId: file.getId(), name: fileName }))
-    .setMimeType(ContentService.MimeType.JSON);
-}</pre>
-        <div style="display: flex; justify-content: flex-end; gap: 8px;">
-          <button type="button" id="copy-apps-script-btn" class="btn btn-primary btn-sm">Copy Apps Script Code</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- =====================================================================
-       6. CUSTOM CONFIRM MODAL (NO BROWSER alert() OR confirm())
+       5. CUSTOM CONFIRM MODAL
        ===================================================================== -->
   <div id="confirm-modal" class="modal-backdrop hidden" style="z-index: 80;">
     <div class="modal-panel" style="max-width: 420px;">
@@ -1717,10 +1638,12 @@
       'use strict';
 
       // =====================================================================
-      // CONSTANTS & CURRENCY MAP
+      // CONNECTED GOOGLE APPS SCRIPT WEB APP ENDPOINT
       // =====================================================================
-      const USERS_KEY = 'dm_tech_users_v2';
-      const SESSION_KEY = 'dm_tech_session_v2';
+      const DRIVE_API_URL = 'https://script.google.com/macros/s/AKfycbwRqlJUHv5_F-GIMX0z6LZAL2qX9QrD4M6NBcCKQWJMiB4ujpk5R7u7HaUuNkbeTb2O/exec';
+
+      const CACHE_KEY = 'dm_tech_drive_cache_v3';
+      const SESSION_KEY = 'dm_tech_verified_session_v3';
 
       const CURRENCY_SYMBOLS = {
         LKR: 'Rs. ',
@@ -1765,13 +1688,14 @@
       // =====================================================================
       // APPLICATION STATE
       // =====================================================================
-      let activeEmail = null;
+      let activeUsername = null;
+      let activePasswordHash = null;
       let state = null;
       let currentPreview = { type: 'invoice', id: null };
       let pendingConfirmCallback = null;
 
       // =====================================================================
-      // UTILITIES
+      // UTILITIES & GOOGLE DRIVE API CLIENT
       // =====================================================================
       function todayISO() {
         return new Date().toISOString().split('T')[0];
@@ -1803,6 +1727,42 @@
         return (val < 0 ? '-' : '') + symbol + formatted;
       }
 
+      async function sha256Hex(plainText) {
+        if (window.crypto && window.crypto.subtle) {
+          const buf = new TextEncoder().encode(plainText);
+          const hashBuf = await window.crypto.subtle.digest('SHA-256', buf);
+          return Array.from(new Uint8Array(hashBuf))
+            .map(b => b.toString(16).padStart(2, '0'))
+            .join('');
+        }
+        // Fallback hash if non-HTTPS local file
+        let h = 2166136261;
+        for (let i = 0; i < plainText.length; i++) {
+          h ^= plainText.charCodeAt(i);
+          h = Math.imul(h, 16777619);
+        }
+        return (h >>> 0).toString(16).padStart(8, '0');
+      }
+
+      async function driveRequest(payload) {
+        const response = await fetch(DRIVE_API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        });
+        const text = await response.text();
+        let data;
+        try {
+          data = JSON.parse(text);
+        } catch (err) {
+          throw new Error('Invalid response from Google Apps Script. Check deployment access is set to Anyone.');
+        }
+        if (!data || data.ok !== true) {
+          throw new Error((data && data.error) || 'Username verification or Google Drive sync failed.');
+        }
+        return data;
+      }
+
       function showToast(message, variant) {
         const container = document.getElementById('toast-container');
         if (!container) return;
@@ -1819,7 +1779,7 @@
         container.appendChild(el);
         setTimeout(() => {
           if (el.parentNode) el.parentNode.removeChild(el);
-        }, 3000);
+        }, 3200);
       }
 
       function openConfirm(title, message, onAccept) {
@@ -1834,13 +1794,13 @@
         document.getElementById('confirm-modal').classList.add('hidden');
       }
 
-      function createDefaultWorkspace(email, profileOverrides) {
+      function createDefaultWorkspace(username, profileOverrides) {
         const prof = Object.assign({
           businessName: 'DM Tech Solutions',
           tagline: 'IT Infrastructure, Hardware & Software Solutions',
-          ownerName: 'Dayalan',
+          ownerName: username,
           phone: '+94 77 000 0000',
-          email: email,
+          email: '',
           address: 'Colombo, Sri Lanka',
           currency: 'LKR',
           pdfTheme: 'theme-royal',
@@ -1849,7 +1809,7 @@
         }, profileOverrides || {});
 
         return {
-          email: email,
+          username: username,
           profile: prof,
           invoices: [],
           quotations: [],
@@ -1866,145 +1826,8 @@
         };
       }
 
-      function createDemoWorkspace() {
-        const email = 'demo@dmtechsolutions.lk';
-        const d = new Date();
-        const prevMonthDate = new Date(d.getFullYear(), d.getMonth() - 1, 12).toISOString().split('T')[0];
-        const overdueDate = addDaysISO(-5);
-
-        const ws = createDefaultWorkspace(email, {
-          businessName: 'DM Tech Solutions',
-          tagline: 'Enterprise IT, Hardware & Cloud Solutions',
-          ownerName: 'Dayalan',
-          phone: '+94 77 456 7890',
-          email: email,
-          address: 'No. 48, Galle Face Center Road, Colombo 03',
-          currency: 'LKR',
-          pdfTheme: 'theme-royal',
-          defaultTax: 0,
-          footerNote: 'Bank: Commercial Bank | Account: DM Tech Solutions | 1-Year Hardware Warranty'
-        });
-
-        ws.invoices = [
-          {
-            id: 'inv_demo_1001',
-            number: 'INV-1001',
-            customerName: 'Apex Logistics (Pvt) Ltd',
-            customerPhone: '+94 11 234 5678',
-            customerEmail: 'billing@apexlogistics.lk',
-            customerAddress: 'Colombo 01',
-            date: todayISO(),
-            dueDate: addDaysISO(14),
-            status: 'Paid',
-            deposit: 520000,
-            discount: 10000,
-            taxRate: 0,
-            taxAmount: 0,
-            subtotal: 530000,
-            grandTotal: 520000,
-            notes: 'Delivered and configured on-site.',
-            items: [
-              { sku: 'LNV-TP14', description: 'Lenovo ThinkPad 14" Business Laptop', qty: 1, price: 325000, total: 325000 },
-              { sku: 'LNV-TC70', description: 'Lenovo ThinkCentre Mini PC', qty: 1, price: 205000, total: 205000 }
-            ]
-          },
-          {
-            id: 'inv_demo_1002',
-            number: 'INV-1002',
-            customerName: 'Ceylon Spice Exports',
-            customerPhone: '+94 71 987 6543',
-            customerEmail: 'accounts@ceylonspice.lk',
-            customerAddress: 'Kandy Road, Kelaniya',
-            date: prevMonthDate,
-            dueDate: overdueDate,
-            status: 'Unpaid',
-            deposit: 0,
-            discount: 0,
-            taxRate: 0,
-            taxAmount: 0,
-            subtotal: 185000,
-            grandTotal: 185000,
-            notes: 'Awaiting final bank transfer.',
-            items: [
-              { sku: 'SVC-NET', description: 'Office Network & Wi-Fi Setup Service', qty: 2, price: 45000, total: 90000 },
-              { sku: 'UPS-1500', description: '1500VA Line-Interactive UPS', qty: 1, price: 95000, total: 95000 }
-            ]
-          }
-        ];
-
-        ws.quotations = [
-          {
-            id: 'qt_demo_5001',
-            number: 'QT-5001',
-            customerName: 'Lanka Med Diagnostics',
-            customerPhone: '+94 76 333 2211',
-            customerEmail: 'it@lankamed.lk',
-            customerAddress: 'Nugegoda',
-            date: todayISO(),
-            dueDate: addDaysISO(30),
-            status: 'Sent',
-            deposit: 0,
-            discount: 0,
-            taxRate: 0,
-            taxAmount: 0,
-            subtotal: 690000,
-            grandTotal: 690000,
-            notes: 'Valid for 30 days.',
-            items: [
-              { sku: 'SRV-ST50', description: 'Tower Server & Backup Configuration', qty: 1, price: 690000, total: 690000 }
-            ]
-          }
-        ];
-
-        ws.expenses = [
-          {
-            id: 'exp_demo_1',
-            title: 'Hardware Stock Purchase',
-            amount: 240000,
-            date: todayISO(),
-            category: 'Hardware / Stock',
-            method: 'Bank Transfer',
-            vendor: 'Metro IT Wholesale'
-          },
-          {
-            id: 'exp_demo_2',
-            title: 'Office Rent & Fiber Internet',
-            amount: 55000,
-            date: prevMonthDate,
-            category: 'Rent & Utilities',
-            method: 'Bank Transfer',
-            vendor: 'Commercial Property'
-          }
-        ];
-
-        ws.nextInvoiceSeq = 1003;
-        ws.nextQuoteSeq = 5002;
-        return ws;
-      }
-
-      // =====================================================================
-      // STORAGE & STATE PERSISTENCE
-      // =====================================================================
-      function readUsersStore() {
-        try {
-          const raw = localStorage.getItem(USERS_KEY);
-          const parsed = raw ? JSON.parse(raw) : {};
-          return parsed && typeof parsed === 'object' ? parsed : {};
-        } catch (err) {
-          return {};
-        }
-      }
-
-      function writeUsersStore(users) {
-        try {
-          localStorage.setItem(USERS_KEY, JSON.stringify(users));
-        } catch (err) {
-          showToast('Storage quota warning: could not save to browser storage.', 'error');
-        }
-      }
-
-      function normalizeWorkspace(rawWs, email) {
-        const base = createDefaultWorkspace(email);
+      function normalizeWorkspace(rawWs, username) {
+        const base = createDefaultWorkspace(username);
         const src = rawWs && typeof rawWs === 'object' ? rawWs : {};
         const mergedProfile = Object.assign({}, base.profile, src.profile || {});
         if (!mergedProfile.businessName) mergedProfile.businessName = 'DM Tech Solutions';
@@ -2101,33 +1924,77 @@
           vendor: String(exp.vendor || '')
         })) : [];
 
-        const catalog = Array.isArray(src.catalog) ? src.catalog : base.catalog;
-        const clients = Array.isArray(src.clients) ? src.clients : base.clients;
-
         return {
-          email: email,
+          username: username,
           profile: mergedProfile,
           invoices: invoices,
           quotations: quotations,
           expenses: expenses,
-          catalog: catalog,
-          clients: clients,
+          catalog: Array.isArray(src.catalog) ? src.catalog : base.catalog,
+          clients: Array.isArray(src.clients) ? src.clients : base.clients,
           nextInvoiceSeq: Math.max(num(src.nextInvoiceSeq, 1001), 1001),
           nextQuoteSeq: Math.max(num(src.nextQuoteSeq, 5001), 5001)
         };
       }
 
-      function saveAndRender() {
-        if (!activeEmail || !state) return;
-        state = normalizeWorkspace(state, activeEmail);
-        const users = readUsersStore();
-        users[activeEmail] = state;
-        writeUsersStore(users);
+      function saveLocalCache(username, wsObj) {
+        try {
+          const all = JSON.parse(localStorage.getItem(CACHE_KEY) || '{}');
+          all[username] = wsObj;
+          localStorage.setItem(CACHE_KEY, JSON.stringify(all));
+        } catch (e) {}
+      }
+
+      function readLocalCache(username) {
+        try {
+          const all = JSON.parse(localStorage.getItem(CACHE_KEY) || '{}');
+          return all[username] || null;
+        } catch (e) {
+          return null;
+        }
+      }
+
+      function setSyncStatus(label, isError) {
+        const badge = document.getElementById('drive-sync-badge');
+        if (!badge) return;
+        badge.textContent = label;
+        badge.style.color = isError ? '#f87171' : '#34d399';
+      }
+
+      async function syncWorkspaceToDrive(showSuccessToast) {
+        if (!activeUsername || !activePasswordHash || !state) return;
+        setSyncStatus('Syncing to Drive...', false);
+        try {
+          await driveRequest({
+            action: 'saveData',
+            username: activeUsername,
+            passwordHash: activePasswordHash,
+            workspace: state
+          });
+          setSyncStatus('Drive Synced (' + new Date().toLocaleTimeString() + ')', false);
+          if (showSuccessToast) {
+            showToast('Synced to Google Drive');
+          }
+        } catch (err) {
+          setSyncStatus('Drive Sync Pending', true);
+          if (showSuccessToast) {
+            showToast(err.message, 'error');
+          }
+        }
+      }
+
+      function saveAndRender(skipDriveSync) {
+        if (!activeUsername || !state) return;
+        state = normalizeWorkspace(state, activeUsername);
+        saveLocalCache(activeUsername, state);
         renderAll();
+        if (!skipDriveSync) {
+          syncWorkspaceToDrive(false);
+        }
       }
 
       // =====================================================================
-      // AUTHENTICATION HANDLERS
+      // USERNAME AUTHENTICATION HANDLERS
       // =====================================================================
       function switchAuthMode(mode) {
         const isLogin = mode === 'login';
@@ -2139,13 +2006,15 @@
         document.getElementById('signup-error').classList.add('hidden');
       }
 
-      function activateSession(email, wsObject) {
-        activeEmail = email;
-        state = normalizeWorkspace(wsObject, email);
-        const users = readUsersStore();
-        users[email] = state;
-        writeUsersStore(users);
-        localStorage.setItem(SESSION_KEY, email);
+      function enterVerifiedWorkspace(username, passwordHash, wsObject) {
+        activeUsername = username;
+        activePasswordHash = passwordHash;
+        state = normalizeWorkspace(wsObject, username);
+        saveLocalCache(username, state);
+
+        try {
+          sessionStorage.setItem(SESSION_KEY, JSON.stringify({ username: username, passwordHash: passwordHash }));
+        } catch (e) {}
 
         document.getElementById('auth-screen').classList.add('hidden');
         document.getElementById('app-screen').classList.remove('hidden');
@@ -2154,28 +2023,45 @@
         populateSettingsForm();
         switchMainTab('dashboard');
         renderAll();
+        setSyncStatus('Drive Connected', false);
       }
 
-      function handleLoginSubmit(e) {
+      async function handleLoginSubmit(e) {
         e.preventDefault();
-        const email = document.getElementById('login-email').value.trim().toLowerCase();
+        const username = document.getElementById('login-username').value.trim().toLowerCase();
         const password = document.getElementById('login-password').value;
         const errBox = document.getElementById('login-error');
-        const users = readUsersStore();
-        const found = users[email];
+        const btn = document.getElementById('login-submit-btn');
 
-        if (!found || found.password !== password) {
-          errBox.textContent = 'Invalid email or password. Try Quick Demo Login or create a new account.';
-          errBox.classList.remove('hidden');
-          return;
-        }
+        if (!username || !password) return;
         errBox.classList.add('hidden');
-        activateSession(email, found);
-        showToast('Signed in to ' + found.profile.businessName);
+        btn.disabled = true;
+        btn.textContent = 'Verifying Username...';
+
+        try {
+          const passwordHash = await sha256Hex(password);
+          // Strict server-side verification via Google Apps Script
+          const res = await driveRequest({
+            action: 'login',
+            username: username,
+            passwordHash: passwordHash
+          });
+
+          const loadedWs = res.workspace || readLocalCache(username) || createDefaultWorkspace(username);
+          enterVerifiedWorkspace(username, passwordHash, loadedWs);
+          showToast('Verified & signed in as ' + username);
+        } catch (err) {
+          errBox.textContent = err.message || 'Invalid username or password.';
+          errBox.classList.remove('hidden');
+        } finally {
+          btn.disabled = false;
+          btn.textContent = 'Verify & Open Workspace';
+        }
       }
 
-      function handleSignupSubmit(e) {
+      async function handleSignupSubmit(e) {
         e.preventDefault();
+        const username = document.getElementById('signup-username').value.trim().toLowerCase();
         const biz = document.getElementById('signup-business').value.trim() || 'DM Tech Solutions';
         const owner = document.getElementById('signup-name').value.trim();
         const phone = document.getElementById('signup-phone').value.trim();
@@ -2183,54 +2069,64 @@
         const password = document.getElementById('signup-password').value;
         const address = document.getElementById('signup-address').value.trim();
         const errBox = document.getElementById('signup-error');
+        const btn = document.getElementById('signup-submit-btn');
 
-        const users = readUsersStore();
-        if (users[email]) {
-          errBox.textContent = 'An account with this email already exists. Please Sign In.';
-          errBox.classList.remove('hidden');
-          return;
-        }
-
-        const newWs = createDefaultWorkspace(email, {
-          businessName: biz,
-          ownerName: owner,
-          phone: phone,
-          email: email,
-          address: address
-        });
-        newWs.password = password;
         errBox.classList.add('hidden');
-        activateSession(email, newWs);
-        showToast('Account created for ' + biz);
-      }
+        btn.disabled = true;
+        btn.textContent = 'Creating & Syncing Drive...';
 
-      function handleQuickDemoLogin() {
-        const demoWs = createDemoWorkspace();
-        demoWs.password = 'demo123';
-        activateSession(demoWs.email, demoWs);
-        showToast('Logged in to DM Tech Solutions Demo Workspace');
+        try {
+          const passwordHash = await sha256Hex(password);
+          const newWs = createDefaultWorkspace(username, {
+            businessName: biz,
+            ownerName: owner,
+            phone: phone,
+            email: email,
+            address: address
+          });
+
+          await driveRequest({
+            action: 'register',
+            username: username,
+            email: email,
+            passwordHash: passwordHash,
+            workspace: newWs
+          });
+
+          enterVerifiedWorkspace(username, passwordHash, newWs);
+          showToast('Account registered & saved to Google Drive');
+        } catch (err) {
+          errBox.textContent = err.message || 'Could not create account.';
+          errBox.classList.remove('hidden');
+        } finally {
+          btn.disabled = false;
+          btn.textContent = 'Create Account & Sync Drive';
+        }
       }
 
       function handleLogout() {
-        localStorage.removeItem(SESSION_KEY);
-        activeEmail = null;
+        try {
+          sessionStorage.removeItem(SESSION_KEY);
+        } catch (e) {}
+        activeUsername = null;
+        activePasswordHash = null;
         state = null;
         document.getElementById('app-screen').classList.add('hidden');
         document.getElementById('auth-screen').classList.remove('hidden');
         document.getElementById('login-password').value = '';
-        showToast('Signed out', 'info');
+        showToast('Signed out safely', 'info');
       }
 
       // =====================================================================
       // NAVIGATION & SIDEBAR
       // =====================================================================
       const TAB_META = {
-        dashboard: ['Dashboard & Profit', 'Real-time revenue, expenses, net profit & saved documents'],
+        dashboard: ['Dashboard & Profit', 'Real-time revenue, expenses, net profit & Google Drive cloud sync'],
         invoices: ['Invoices', 'Create invoices, mark paid/unpaid, and export A4 PDFs'],
         quotations: ['Quotations', 'Create quotations and convert accepted quotes to invoices'],
         expenses: ['Expenses', 'Track business spending and recalculate net profit'],
         directory: ['Catalog & Clients', 'Saved IT items/services and client contact directory'],
-        settings: ['Settings & Data', 'Business profile, currency, PDF theme, backup & reset']
+        settings: ['Settings & Data', 'Business profile, currency, PDF theme, Drive sync & reset']
       };
 
       function setMobileSidebar(open) {
@@ -2304,7 +2200,7 @@
       function renderChrome() {
         document.getElementById('sidebar-logo-slot').innerHTML = DM_HEX_LOGO_SVG;
         document.getElementById('sidebar-owner-sub').textContent = state.profile.ownerName || state.profile.businessName;
-        document.getElementById('sidebar-user-email').textContent = state.email;
+        document.getElementById('sidebar-user-email').textContent = 'Username: ' + activeUsername;
 
         const bizName = state.profile.businessName || 'DM Tech Solutions';
         const titleEl = document.getElementById('sidebar-biz-title');
@@ -2801,7 +2697,6 @@
           ? (statusVal === 'Paid' ? totals.grandTotal : Math.min(num(document.getElementById('doc-deposit').value, 0), totals.grandTotal))
           : 0;
 
-        // Auto-save client to directory if not already present
         if (custName && !state.clients.some(c => c.name.toLowerCase() === custName.toLowerCase())) {
           state.clients.unshift({
             id: 'cli_' + Date.now(),
@@ -3075,7 +2970,7 @@
         document.getElementById('set-default-tax').value = num(p.defaultTax, 0);
         document.getElementById('set-owner').value = p.ownerName || '';
         document.getElementById('set-phone').value = p.phone || '';
-        document.getElementById('set-email').value = p.email || activeEmail;
+        document.getElementById('set-email').value = p.email || '';
         document.getElementById('set-address').value = p.address || '';
         document.getElementById('set-notes').value = p.footerNote || '';
       }
@@ -3090,12 +2985,12 @@
           defaultTax: num(document.getElementById('set-default-tax').value, 0),
           ownerName: document.getElementById('set-owner').value.trim(),
           phone: document.getElementById('set-phone').value.trim(),
-          email: document.getElementById('set-email').value.trim() || activeEmail,
+          email: document.getElementById('set-email').value.trim(),
           address: document.getElementById('set-address').value.trim(),
           footerNote: document.getElementById('set-notes').value.trim()
         };
         saveAndRender();
-        showToast('Settings saved');
+        showToast('Settings saved & synced to Google Drive');
       }
 
       function exportBackupJson() {
@@ -3104,7 +2999,7 @@
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'dm_tech_backup_' + todayISO() + '.json';
+        a.download = 'dm_tech_' + activeUsername + '_' + todayISO() + '.json';
         a.click();
         URL.revokeObjectURL(url);
         showToast('Backup JSON downloaded');
@@ -3121,12 +3016,10 @@
               showToast('Invalid backup JSON format.', 'error');
               return;
             }
-            const pw = state.password;
-            state = normalizeWorkspace(parsed, activeEmail);
-            if (pw) state.password = pw;
+            state = normalizeWorkspace(parsed, activeUsername);
             populateSettingsForm();
             saveAndRender();
-            showToast('Backup restored successfully');
+            showToast('Backup restored & synced to Google Drive');
           } catch (err) {
             showToast('Could not parse JSON file.', 'error');
           }
@@ -3156,9 +3049,7 @@
           'Full Account Reset?',
           'This will reset your entire workspace (Invoices, Quotations, Expenses, Catalog, Clients, and Company Settings) to clean defaults.',
           () => {
-            const pw = state.password;
-            state = createDefaultWorkspace(activeEmail);
-            if (pw) state.password = pw;
+            state = createDefaultWorkspace(activeUsername);
             populateSettingsForm();
             saveAndRender();
             showToast('Full account reset completed');
@@ -3174,8 +3065,9 @@
         document.getElementById('auth-tab-signup').addEventListener('click', () => switchAuthMode('signup'));
         document.getElementById('login-form').addEventListener('submit', handleLoginSubmit);
         document.getElementById('signup-form').addEventListener('submit', handleSignupSubmit);
-        document.getElementById('quick-demo-login-btn').addEventListener('click', handleQuickDemoLogin);
         document.getElementById('logout-btn').addEventListener('click', handleLogout);
+        document.getElementById('manual-sync-btn').addEventListener('click', () => syncWorkspaceToDrive(true));
+        document.getElementById('settings-sync-now-btn').addEventListener('click', () => syncWorkspaceToDrive(true));
 
         document.getElementById('mobile-open-sidebar').addEventListener('click', () => setMobileSidebar(true));
         document.getElementById('mobile-close-sidebar').addEventListener('click', () => setMobileSidebar(false));
@@ -3241,7 +3133,6 @@
           e.target.value = '';
         });
 
-        // Delegated actions for invoices, quotations, expenses, catalog & clients
         document.body.addEventListener('click', e => {
           const paidBtn = e.target.closest('.js-toggle-paid');
           if (paidBtn) {
@@ -3297,13 +3188,11 @@
           }
         });
 
-        // Search & filter listeners
         document.getElementById('invoice-search').addEventListener('input', renderInvoicesTab);
         document.getElementById('invoice-status-filter').addEventListener('change', renderInvoicesTab);
         document.getElementById('quote-search').addEventListener('input', renderQuotationsTab);
         document.getElementById('exp-filter-category').addEventListener('change', renderExpensesTab);
 
-        // Expense & Directory forms
         document.getElementById('expense-form').addEventListener('submit', handleExpenseSubmit);
         document.getElementById('export-expenses-csv-btn').addEventListener('click', exportExpensesCsv);
 
@@ -3337,7 +3226,6 @@
           showToast('Client saved');
         });
 
-        // Preview modal controls
         document.getElementById('preview-theme-select').addEventListener('change', e => {
           applyPreviewTheme(e.target.value);
           if (state && state.profile) {
@@ -3350,35 +3238,12 @@
           document.getElementById('preview-modal').classList.add('hidden');
         });
 
-        // Settings, Backup, Google Drive & Reset controls
         document.getElementById('settings-form').addEventListener('submit', handleSettingsSubmit);
         document.getElementById('export-json-btn').addEventListener('click', exportBackupJson);
         document.getElementById('import-json-input').addEventListener('change', importBackupJson);
         document.getElementById('reset-transactions-btn').addEventListener('click', resetTransactionsOnly);
         document.getElementById('reset-full-btn').addEventListener('click', resetFullAccountData);
 
-        document.getElementById('open-gdrive-modal-btn').addEventListener('click', () => {
-          document.getElementById('gdrive-modal').classList.remove('hidden');
-        });
-        document.getElementById('close-gdrive-modal-btn').addEventListener('click', () => {
-          document.getElementById('gdrive-modal').classList.add('hidden');
-        });
-        document.getElementById('copy-apps-script-btn').addEventListener('click', () => {
-          const text = document.getElementById('apps-script-snippet').textContent;
-          const ta = document.createElement('textarea');
-          ta.value = text;
-          document.body.appendChild(ta);
-          ta.select();
-          try {
-            document.execCommand('copy');
-            showToast('Google Apps Script copied');
-          } catch (err) {
-            showToast('Select and copy the snippet manually.', 'info');
-          }
-          document.body.removeChild(ta);
-        });
-
-        // Confirm modal wiring
         document.getElementById('confirm-cancel-btn').addEventListener('click', closeConfirm);
         document.getElementById('confirm-accept-btn').addEventListener('click', () => {
           const cb = pendingConfirmCallback;
@@ -3388,17 +3253,28 @@
       }
 
       // =====================================================================
-      // INITIALIZATION
+      // INITIALIZATION (RE-VERIFY SESSION WITH DRIVE ON LOAD)
       // =====================================================================
-      window.addEventListener('DOMContentLoaded', () => {
+      window.addEventListener('DOMContentLoaded', async () => {
         bindEvents();
-        const savedSessionEmail = localStorage.getItem(SESSION_KEY);
-        const users = readUsersStore();
-        if (savedSessionEmail && users[savedSessionEmail]) {
-          activateSession(savedSessionEmail, users[savedSessionEmail]);
-        } else {
-          document.getElementById('auth-screen').classList.remove('hidden');
-          document.getElementById('app-screen').classList.add('hidden');
+        document.getElementById('auth-screen').classList.remove('hidden');
+        document.getElementById('app-screen').classList.add('hidden');
+
+        try {
+          const rawSession = sessionStorage.getItem(SESSION_KEY);
+          if (!rawSession) return;
+          const sess = JSON.parse(rawSession);
+          if (!sess || !sess.username || !sess.passwordHash) return;
+
+          const res = await driveRequest({
+            action: 'loadData',
+            username: sess.username,
+            passwordHash: sess.passwordHash
+          });
+          const ws = res.workspace || readLocalCache(sess.username) || createDefaultWorkspace(sess.username);
+          enterVerifiedWorkspace(sess.username, sess.passwordHash, ws);
+        } catch (err) {
+          try { sessionStorage.removeItem(SESSION_KEY); } catch (e) {}
         }
       });
     })();
